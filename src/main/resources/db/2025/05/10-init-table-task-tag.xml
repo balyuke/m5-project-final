@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="2025-05-01-10-task-tag" author="kmpk">
+        <createTable tableName="TASK_TAG">
+            <column name="ID" type="BIGSERIAL">
+                <constraints primaryKey="true" primaryKeyName="TASK_TAG_PKEY"/>  <!-- Исправлено имя PK -->
+            </column>
+            <column name="TASK_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TAG" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addUniqueConstraint
+                tableName="TASK_TAG"
+                columnNames="TASK_ID, TAG"
+                constraintName="UK_TASK_TAG"/>
+
+        <addForeignKeyConstraint
+                baseTableName="TASK_TAG"
+                baseColumnNames="TASK_ID"
+                referencedTableName="TASK"
+                referencedColumnNames="ID"
+                constraintName="FK_TASK_TAG_TASK"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

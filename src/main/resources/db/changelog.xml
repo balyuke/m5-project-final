@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <include file="/2025/05/00-init-schema.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/01-init-table-project.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/02-init-table-mail-case.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/03-init-table-sprint.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/04-init-table-reference.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/05-init-table-users.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/06-init-table-profile.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/07-init-table-contact.xml" relativeToChangelogFile="true"/>
+
+    <include file="/2025/05/08-init-table-task.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/09-init-table-activity.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/10-init-table-task-tag.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/11-init-table-user-belong.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/12-init-table-attachment.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/13-init-table-user-role.xml" relativeToChangelogFile="true"/>
+
+    <include file="/2025/05/14-users-data.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/15-reference-data.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/16-change-backtracking-tables.xml" relativeToChangelogFile="true"/>
+
+    <include file="/2025/05/17-change-task-status-reference.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/18-users-add-on-delete-cascade.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/19-change-user-type-reference.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/20-refactor-reference-aux.xml" relativeToChangelogFile="true"/>
+    <include file="/2025/05/21-change-uk-user-belong-posgres.xml" relativeToChangelogFile="true"/>
+
+    <include file="/2025/05/23-data4dev-data-v2.xml"  relativeToChangelogFile="true"/>
+<!--    <include file="/2025/05/22-data4dev-data-test.sql" relativeToChangelogFile="true"/>-->
+</databaseChangeLog>
+
+
+
+
+

@@ -1,3 +1,4 @@
+#  https://docs.spring.io/spring-boot/how-to/data-initialization.html
 #  https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 app:
   host-url: http://localhost:8080
@@ -8,30 +9,44 @@ app:
     max-pool-size: 100
 
 spring:
+
+  sql:
+    init:
+      mode: always
+
   init:
     mode: never
+
   jpa:
+#    defer-datasource-initialization: true
     show-sql: true
     open-in-view: false
 
     # validate db by model
     hibernate:
+#      ddl-auto: create-drop
+#      ddl-auto: validate
       ddl-auto: validate
 
     properties:
       #  http://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
       hibernate:
+#        default_schema: jira
         format_sql: true
         default_batch_fetch_size: 20
         # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
         jdbc.batch_size: 20
+
   datasource:
     url: jdbc:postgresql://localhost:5432/jira
+    # for docker
+#    url: jdbc:postgresql://db-prod:5432/jira
     username: jira
     password: JiraRush
 
   liquibase:
-    changeLog: "classpath:db/changelog.sql"
+    changeLog: "classpath:db/changelog.xml"
+#    defaultSchema: jira
 
   # Jackson Fields Serialization
   jackson:
@@ -98,10 +113,6 @@ spring:
             token-uri: https://gitlab.com/oauth/token
             user-info-uri: https://gitlab.com/api/v4/user
             user-name-attribute: email
-
-  sql:
-    init:
-      mode: always
 
   mail:
     properties:

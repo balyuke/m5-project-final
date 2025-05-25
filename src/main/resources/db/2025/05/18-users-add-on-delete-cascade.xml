@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2025-05-03-18-users-add-on-delete-cascade" author="gkislin">
+        <!-- Update ACTIVITY table constraint
+                alter table ACTIVITY
+                    drop constraint FK_ACTIVITY_USERS,
+                    add constraint FK_ACTIVITY_USERS foreign key (AUTHOR_ID) references USERS (ID) on delete cascade;
+        -->
+        <dropForeignKeyConstraint
+                baseTableName="ACTIVITY"
+                constraintName="FK_ACTIVITY_USERS"/>
+
+        <addForeignKeyConstraint
+                baseTableName="ACTIVITY"
+                baseColumnNames="AUTHOR_ID"
+                referencedTableName="USERS"
+                referencedColumnNames="ID"
+                constraintName="FK_ACTIVITY_USERS"
+                onDelete="CASCADE"/>
+
+        <!-- Update USER_BELONG table constraint
+                alter table USER_BELONG
+                    drop constraint FK_USER_BELONG,
+                    add constraint FK_USER_BELONG foreign key (USER_ID) references USERS (ID) on delete cascade;
+        -->
+        <dropForeignKeyConstraint
+                baseTableName="USER_BELONG"
+                constraintName="FK_USER_BELONG"/>
+
+        <addForeignKeyConstraint
+                baseTableName="USER_BELONG"
+                baseColumnNames="USER_ID"
+                referencedTableName="USERS"
+                referencedColumnNames="ID"
+                constraintName="FK_USER_BELONG"
+                onDelete="CASCADE"/>
+
+        <!-- Update ATTACHMENT table constraint
+                alter table ATTACHMENT
+                    drop constraint FK_ATTACHMENT,
+                    add constraint FK_ATTACHMENT foreign key (USER_ID) references USERS (ID) on delete cascade;
+        -->
+        <dropForeignKeyConstraint
+                baseTableName="ATTACHMENT"
+                constraintName="FK_ATTACHMENT"/>
+
+        <addForeignKeyConstraint
+                baseTableName="ATTACHMENT"
+                baseColumnNames="USER_ID"
+                referencedTableName="USERS"
+                referencedColumnNames="ID"
+                constraintName="FK_ATTACHMENT"
+                onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

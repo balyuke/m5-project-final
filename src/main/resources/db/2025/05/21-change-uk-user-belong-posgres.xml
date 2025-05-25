@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2025-05-03-21-users_add_on_delete_cascade" author="ishlyakhtenkov">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="user_belong"/>
+            <dbms type="postgresql"/>
+        </preConditions>
+
+        <!-- Создание проверки уникальности для PostgreSQL -->
+        <sql splitStatements="true">
+            <!-- Сначала удаляем foreign key constraint -->
+            alter table USER_BELONG drop constraint if exists FK_USER_BELONG;
+
+            <!-- Удаляем constraint (а не индекс) -->
+            alter table USER_BELONG drop constraint if exists UK_USER_BELONG;
+
+            <!-- Добавляем новый foreign key -->
+            alter table USER_BELONG
+                add constraint FK_USER_BELONG foreign key (USER_ID) references USERS (ID) on delete cascade;
+
+            <!-- Создаем новый partial unique index -->
+            create unique index if not exists UK_USER_BELONG
+                on USER_BELONG (OBJECT_ID, OBJECT_TYPE, USER_ID, USER_TYPE_CODE)
+                where ENDPOINT is null;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
