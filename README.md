@@ -63,3 +63,5 @@
 <p>&#10004;&#65039; 10. Write a docker-compose file to run the server container along with the database and nginx. For nginx, use the config/nginx.conf config file. If necessary, the config file can be edited.</p>
 <img src="resources/images/Task_09_10_DockerCompose.png"/>
 <br>
+<p>&#10004;&#65039; 6. FileUtil#upload refactored</p>
+<img src="resources/images/Task_06_1_Code.png"/>
