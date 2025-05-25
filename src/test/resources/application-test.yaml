@@ -1,5 +1,9 @@
 spring.cache.type: none
 spring:
+  config:
+    activate:
+      on-profile: test
+
   init:
     mode: always
   #  datasource:
