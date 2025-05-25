@@ -1,5 +1,4 @@
-﻿#FROM maven:3.9.1 AS build
-FROM maven:3.9.9-amazoncorretto-17 as build
+﻿FROM maven:3.9.9-amazoncorretto-17 as build
 RUN mkdir /app
 WORKDIR /app
 COPY . /app

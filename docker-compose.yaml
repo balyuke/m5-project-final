@@ -23,8 +23,8 @@ services:
 #      dockerfile: Dockerfile-local-build
       dockerfile: Dockerfile
     depends_on:
-      - nginx
       - db-prod
+      - nginx
     env_file:
       - config/jira-app-prod.env
 

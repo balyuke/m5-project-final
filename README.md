@@ -59,3 +59,7 @@
 <br>
 <img src="resources/images/Task_11_4_ProfileRu.png"/>
 <div align="center"><b>Profile Ru</b></div>
+<p>&#10004;&#65039; 9. Write a Dockerfile for the main server.</p>
+<p>&#10004;&#65039; 10. Write a docker-compose file to run the server container along with the database and nginx. For nginx, use the config/nginx.conf config file. If necessary, the config file can be edited.</p>
+<img src="resources/images/Task_09_10_DockerCompose.png"/>
+<br>
