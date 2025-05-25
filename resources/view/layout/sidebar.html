@@ -18,8 +18,8 @@
         </a>
         <div th:if="${authUser} == null">
             <a class="d-lg-none btn btn-orange px-2 px-md-4 me-3 me-md-4 mx-2" href="/view/login" type="button">
-                <span class="d-md-none">Login/Reg</span>
-                <span class="d-none d-md-block">Login/Register</span>
+                <span class="d-md-none" th:text="#{header.login-md}"></span>
+                <span class="d-none d-md-block" th:text="#{header.login}"></span>
             </a>
         </div>
         <th:block th:if="${authUser} != null">

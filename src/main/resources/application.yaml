@@ -13,6 +13,10 @@ spring:
   config:
     import: ./application-secrets.yaml
 
+  messages:
+    basename: locale/messages
+    encoding: UTF-8
+
   sql:
     init:
       mode: always

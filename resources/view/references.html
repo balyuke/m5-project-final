@@ -30,9 +30,9 @@
         <table class="table table-striped" id="table" style="text-align: left;">
             <thead>
             <tr>
-                <th>Title</th>
-                <th>Code</th>
-                <th>AUX</th>
+                <th th:text="#{reference.table.title}"></th>
+                <th th:text="#{reference.table.code}"></th>
+                <th th:text="#{reference.table.aux}"></th>
                 <th></th>
                 <th></th>
             </tr>
@@ -53,21 +53,25 @@
                         <div class="modal-body text-start">
 
                             <div class="mb-3">
-                                <label class="col-form-label" for="ref-title">Title:</label>
-                                <input class="form-control" id="ref-title" type="text">
+                                <label for="ref-title" class="col-form-label"
+                                       th:text="#{reference.create.title}+':'"></label>
+                                <input type="text" class="form-control" id="ref-title">
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="ref-code">Code:</label>
-                                <input class="form-control" id="ref-code" type="text"></input>
+                                <label for="ref-code" class="col-form-label"
+                                       th:text="#{reference.create.code}+':'"></label>
+                                <input type="text" class="form-control" id="ref-code"></input>
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="ref-aux">AUX:</label>
-                                <input class="form-control" id="ref-aux" type="text">
+                                <label for="ref-aux" class="col-form-label"
+                                       th:text="#{reference.create.aux}+':'"></label>
+                                <input type="text" class="form-control" id="ref-aux">
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="ref-type">Type:</label>
-                                <select aria-label="ref-type" class="form-select" id="ref-type">
-                                    <option th:each="type : ${refTypes}" th:text="${type}" th:value="${type}"></option>
+                                <label for="ref-type" class="col-form-label"
+                                       th:text="#{reference.create.type}+':'"></label>
+                                <select class="form-select" aria-label="ref-type" id="ref-type">
+                                    <option th:each="type : ${refTypes}" th:value="${type}" th:text="${type}"></option>
                                 </select>
                             </div>
 
