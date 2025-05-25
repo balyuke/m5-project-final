@@ -1,62 +1,55 @@
-# Running by command:
-# docker-compose up -d
+﻿# Running services:
+#   docker-compose up -d
 
-# Remove
-# docker-compose down --volumes
-
-# connect throw browser
-# http://localhost:8888/
+# Remove containers:
+#   docker-compose down --volumes
 
 
+
+volumes:
+  pgdata:
+    name: pgdata
 
 name: jiraRush
+
 services:
-#  app:
-#    container_name: jiraRush
-  db-prod:
-    image: postgres
-    container_name: postgres-db
-    restart: always
-    env_file:
-      - .env
-    environment:
-      - DATABASE_HOST=127.0.0.1
-      - POSTGRES_DB=${POSTGRES_DB_DEV}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  jira:
+    image: jira-app
+    container_name: jira
     ports:
-      - ${POSTGRES_DEV_PORT}:5432
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-
-  db-test:
-    image: postgres
-    restart: always
-    container_name: postgres-db-test
-    env_file:
-      - .env
-    environment:
-      - DATABASE_HOST=127.0.0.1
-      - POSTGRES_DB=${POSTGRES_DB_TEST}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - ./pgdata-test:/var/lib/postgresql/data
-    ports:
-      - ${POSTGRES_TEST_PORT}:5432
-
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4_container
-    env_file:
-      - .env
-    restart: always
-    ports:
-      - ${PGADMIN_PORT}
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      - "8080:8080"
+    build:
+      context: .
+#      dockerfile: Dockerfile-local-build
+      dockerfile: Dockerfile
     depends_on:
+      - nginx
       - db-prod
-      - db-test
+    env_file:
+      - config/jira-app-prod.env
+
+  nginx:
+    container_name: nginx
+    image: nginx:1.13
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/nginx.conf
+
+  db-prod:
+    image: postgres:17
+    container_name: db-prod
+    env_file:
+      - config/postgresql-prod.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U jira -d jira" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
